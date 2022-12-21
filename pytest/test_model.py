@@ -2,6 +2,10 @@ import pytest
 import torch
 
 
+def test_model(model):
+    assert model is not None
+
+
 @pytest.mark.parametrize("num_classes", [10, 100, 1000])
 def test_logo_detection_model(num_classes, model):
     # Create a logo detection model instance

@@ -1,5 +1,5 @@
 import torch
-from helpers import set_requires_grad, create_model, save_model, load_model
+from .helpers import set_requires_grad, create_model, save_model, load_model
 
 
 class LogoDetectionModel(torch.nn.Module):

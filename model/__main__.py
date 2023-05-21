@@ -1,4 +1,5 @@
 from torchsummary import summary
+
 from model import LogoDetectionModel
 
 # Create an instance of the model with the desired number of classes

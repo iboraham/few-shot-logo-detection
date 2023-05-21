@@ -12,6 +12,8 @@ black = "*"
 roboflow = "*"
 python-dotenv = "*"
 torchvision = "*"
+torchsummary = "*"
+pytest = "*"
 
 [dev-packages]
 

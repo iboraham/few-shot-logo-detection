@@ -1,5 +1,6 @@
 import torch
-from .helpers import set_requires_grad, create_model, save_model, load_model
+
+from .helpers import create_model, load_model, save_model, set_requires_grad
 
 
 class LogoDetectionModel(torch.nn.Module):
@@ -12,13 +13,14 @@ class LogoDetectionModel(torch.nn.Module):
 
     Args:
         num_classes (int): Number of classes to predict.
+        freeze (bool): Whether to freeze the model parameters or not.
     """
 
-    def __init__(self, num_classes: int):
-
+    def __init__(self, num_classes: int, freeze: bool = False):
         super(LogoDetectionModel, self).__init__()
         self.model: torch.nn.Module = create_model(num_classes)
-        set_requires_grad(self.model, requires_grad=False)
+        if freeze:
+            set_requires_grad(self.model, requires_grad=False)
 
     def forward(self, images: torch.Tensor) -> torch.Tensor:
         # Perform classification on the extracted features

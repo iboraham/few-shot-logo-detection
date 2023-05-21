@@ -1,6 +1,7 @@
 import torch
 import torchvision
-from torchvision.models import resnet18, ResNet18_Weights
+from torchvision.models import detection
+from torchvision.models.detection import RetinaNet, RetinaNet_ResNet50_FPN_Weights
 
 
 def set_requires_grad(model: torch.nn.Module, requires_grad: bool) -> None:
@@ -10,12 +11,11 @@ def set_requires_grad(model: torch.nn.Module, requires_grad: bool) -> None:
 
 def create_model(num_classes: int) -> torch.nn.Module:
     # Use a pretrained backbone such as ResNet or VGG
-    model: torchvision.models.resnet.ResNet = resnet18(
-        weights=ResNet18_Weights.DEFAULT)
-
-    # Replace the last fully connected layer with a new one
-    model.fc: torch.nn.Linear = torch.nn.Linear(
-        model.fc.in_features, num_classes)
+    model: torchvision.models.detection.RetinaNet = detection.retinanet_resnet50_fpn(
+        weights=RetinaNet_ResNet50_FPN_Weights.DEFAULT,
+        progress=False,
+    )
+    print(model)
 
     return model
 

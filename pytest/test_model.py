@@ -1,5 +1,6 @@
 import pytest
 import torch
+from torchsummary import summary
 
 
 def test_model(model):
@@ -11,6 +12,8 @@ def test_logo_detection_model(num_classes, model):
     # Create a logo detection model instance
     model = model(num_classes)
 
+    print(summary(model, (3, 256, 256)))
+
     # Create random input data
     batch_size = 16
     images = torch.randn(batch_size, 3, 256, 256)
@@ -19,4 +22,7 @@ def test_logo_detection_model(num_classes, model):
     predictions = model(images)
 
     # Verify that the output of the model has the expected shape
-    assert predictions.shape == (batch_size, num_classes)
+    assert predictions.shape == (batch_size, num_classes), (
+        f"Expected output shape of (batch_size, {num_classes}), "
+        f"but got {predictions.shape}"
+    )

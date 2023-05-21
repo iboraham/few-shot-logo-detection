@@ -1,16 +1,15 @@
 try:
     from model import LogoDetectionModel
-    from data import DFLogoDetectionDataset
+    from data import LogoDetectionDataset
 except ModuleNotFoundError:
     import sys
     import os
 
     # Add the parent directory to the path
-    sys.path.append(os.path.dirname(
-        os.path.dirname(os.path.abspath(__file__))))
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
     from model import LogoDetectionModel
-    from data import DFLogoDetectionDataset
+    from data import LogoDetectionDataset
 import pytest
 
 
@@ -21,15 +20,9 @@ def model():
 
 @pytest.fixture
 def dataset():
-    return DFLogoDetectionDataset
+    return LogoDetectionDataset
 
 
 @pytest.fixture
 def data_dir():
-    return os.path.join(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__))), "data")
-
-
-@pytest.fixture
-def labels_file(data_dir):
-    return os.path.join(data_dir, "labels_logo-detection.csv")
+    return os.path.join("data", "game_stats-1", "train")
